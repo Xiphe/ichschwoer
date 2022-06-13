@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "moduleResolution": "node",
+    "target": "ES2020",
+    "declaration": true,
+    "module": "CommonJS",
+    "outDir": "."
+  },
+  "exclude": [],
+  "include": ["./src/*.ts"]
+}
