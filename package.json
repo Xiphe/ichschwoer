@@ -1,6 +1,6 @@
 {
   "name": "ichschwoer",
-  "version": "0.0.0-development",
+  "version": "0.0.1",
   "description": "advanced promise utilities",
   "main": "index.js",
   "module": "dist/index.js",
