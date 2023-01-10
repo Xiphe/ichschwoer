@@ -1,5 +1,8 @@
 export type Job<T> = () => Promise<T> | T;
 
+/**
+ * Create a rateLimited queue that only executes max Jobs within windowMs
+ */
 export default function createRateLimit(max: number, windowMs: number) {
   let window = 0;
   const jobs: Job<any>[] = [];

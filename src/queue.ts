@@ -1,6 +1,10 @@
-export type Job<T> = () => Promise<T> | T;
+export type Job<T> = () => PromiseLike<T> | T;
 
-export default function createQueue(maxParallel: number = Infinity) {
+/**
+ * Create a queue object that executes Jobs pushed to it in order
+ * while never exceeding the maxParallel amount (default: 1)
+ */
+export default function createQueue(maxParallel: number = 1) {
   let running = 0;
   const jobs: Job<any>[] = [];
 
