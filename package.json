@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@sinonjs/fake-timers": "10.0.2",
-    "@types/node": "18.11.18",
+    "@types/node": "18.14.2",
     "@types/sinonjs__fake-timers": "8.1.2",
     "esbuild": "0.17.5",
     "esbuild-register": "3.4.2",
