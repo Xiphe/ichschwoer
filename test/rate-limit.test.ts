@@ -23,6 +23,7 @@ test('rateLimit executes only set jobs within time window', async () => {
   rateLimit.push(() => {
     check.push('Three');
   });
+  rateLimit.onEmpty(() => check.push('Empty'));
 
   assert.deepEqual(check, ['One']);
   assert.deepEqual(rateLimit.length, 3);
@@ -36,7 +37,7 @@ test('rateLimit executes only set jobs within time window', async () => {
   assert.deepEqual(rateLimit.length, 1);
 
   clock.tick(100);
-  assert.deepEqual(check, ['One', 'Two', 'Three']);
+  assert.deepEqual(check, ['One', 'Two', 'Three', 'Empty']);
   assert.deepEqual(rateLimit.length, 0);
 
   clock.uninstall();

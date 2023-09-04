@@ -6,12 +6,17 @@ export type Job<T> = () => Promise<T> | T;
 export default function createRateLimit(max: number, windowMs: number) {
   let window = 0;
   const jobs: Job<any>[] = [];
+  const onEmpty: (() => void)[] = [];
 
   const trigger = () => {
     if (window === 0) {
       setTimeout(() => {
         window = 0;
         const next = Math.min(max, jobs.length);
+        if (next === 0) {
+          onEmpty.forEach((cb) => cb());
+          return;
+        }
         for (let i = 0; i < next; i++) {
           trigger();
         }
@@ -27,6 +32,13 @@ export default function createRateLimit(max: number, windowMs: number) {
   return {
     get length() {
       return jobs.length + window;
+    },
+    onEmpty(cb: () => void) {
+      onEmpty.push(cb);
+
+      return () => {
+        onEmpty.splice(onEmpty.indexOf(cb), 1);
+      };
     },
     push<T>(job: Job<T>): Promise<T> {
       return new Promise<T>((resolve, reject) => {

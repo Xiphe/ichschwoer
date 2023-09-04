@@ -7,6 +7,7 @@ export type Job<T> = () => PromiseLike<T> | T;
 export default function createQueue(maxParallel: number = 1) {
   let running = 0;
   const jobs: Job<any>[] = [];
+  const onEmpty: (() => void)[] = [];
 
   const trigger = () => {
     if (running < maxParallel && jobs.length) {
@@ -16,12 +17,21 @@ export default function createQueue(maxParallel: number = 1) {
         running--;
         trigger();
       });
+    } else if (!jobs.length && running === 0) {
+      onEmpty.forEach((cb) => cb());
     }
   };
 
   return {
     get length() {
       return jobs.length + running;
+    },
+    onEmpty(cb: () => void) {
+      onEmpty.push(cb);
+
+      return () => {
+        onEmpty.splice(onEmpty.indexOf(cb), 1);
+      };
     },
     push<T>(job: Job<T>): Promise<T> {
       return new Promise<T>((resolve, reject) => {

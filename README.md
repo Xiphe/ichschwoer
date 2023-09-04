@@ -17,6 +17,7 @@ npm i ichschwoer
 - `createQueue`
 - `createRateLimit`
 - `createBatchResolve`
+- `createScatter`
 
 ## WTF is that name?
 

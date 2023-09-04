@@ -77,6 +77,8 @@ test('queue runs jobs in parallel', async () => {
 
   const check: string[] = [];
 
+  singleLine.onEmpty(() => check.push('Empty'));
+
   singleLine.push(() => {
     check.push('One');
     return d1.promise;
@@ -112,7 +114,7 @@ test('queue runs jobs in parallel', async () => {
   d1.resolve('1');
   await tick();
 
-  assert.deepEqual(check, ['One', 'Two', 'Three', 'Four']);
+  assert.deepEqual(check, ['One', 'Two', 'Three', 'Four', 'Empty']);
   assert.deepEqual(singleLine.length, 0);
 });
 
