@@ -1,19 +1,19 @@
-export type Job<T> = () => PromiseLike<T> | T;
+import type { Job } from './job';
 
 /**
- * Makes sure all callbacks are executed with at least set ms delay
+ * Make sure all callbacks are executed with at least set ms delay
  */
-export default function createScatter(delay: number) {
+export default function createScatter(delayMs: number) {
   let lastExecution = -Infinity;
   let waiting = false;
-  const jobs: Job<any>[] = [];
+  const jobs: (() => Promise<any>)[] = [];
   const onEmpty: (() => void)[] = [];
 
   const trigger = () => {
     if (jobs.length && !waiting) {
       const now = Date.now();
 
-      if (lastExecution + delay <= now) {
+      if (lastExecution + delayMs <= now) {
         lastExecution = now;
         const job = jobs.shift()!;
         job().finally(() => {
@@ -27,7 +27,7 @@ export default function createScatter(delay: number) {
         setTimeout(() => {
           waiting = false;
           trigger();
-        }, lastExecution + delay - now);
+        }, lastExecution + delayMs - now);
       }
     }
   };

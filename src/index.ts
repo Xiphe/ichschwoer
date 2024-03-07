@@ -1,5 +1,5 @@
 export type { Value } from './batch-resolve';
-export type { Job } from './queue';
+export type { Job } from './job';
 
 export { default as createBatchResolve } from './batch-resolve';
 export { default as Deferred } from './defer';

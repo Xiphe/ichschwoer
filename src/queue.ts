@@ -1,4 +1,4 @@
-export type Job<T> = () => PromiseLike<T> | T;
+import type { Job } from './job';
 
 /**
  * Create a queue object that executes Jobs pushed to it in order

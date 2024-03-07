@@ -1,4 +1,4 @@
-export type Job<T> = () => Promise<T> | T;
+import type { Job } from './job';
 
 /**
  * Create a rateLimited queue that only executes max Jobs within windowMs
