@@ -29,16 +29,13 @@ jobs:
       - name: ⎔ Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
 
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
 
       - name: 🃏 Run test
         run: npm test
-
-      - uses: codecov/codecov-action@v3
-        if: ${{ matrix.coverage }}
 
       - name: ⚙️ Semantic Release
         run: npx semantic-release
