@@ -45,12 +45,12 @@
     ]
   },
   "devDependencies": {
-    "@sinonjs/fake-timers": "10.0.2",
-    "@types/node": "18.15.11",
-    "@types/sinonjs__fake-timers": "8.1.2",
-    "esbuild": "0.17.15",
-    "esbuild-register": "3.4.2",
-    "typescript": "5.0.3",
+    "@sinonjs/fake-timers": "11.2.2",
+    "@types/node": "20.11.25",
+    "@types/sinonjs__fake-timers": "8.1.5",
+    "esbuild": "0.20.1",
+    "esbuild-register": "3.5.0",
+    "typescript": "5.4.2",
     "utap": "0.2.0"
   }
 }
